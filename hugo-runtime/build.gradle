@@ -3,13 +3,13 @@ import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+
 
 dependencies {
-  compile 'org.aspectj:aspectjrt:1.8.6'
-  compile project(':hugo-annotations')
+  implementation 'org.aspectj:aspectjrt:1.8.6'
+  implementation project(':hugo-annotations')
 
-  testCompile 'junit:junit:4.12'
+  testImplementation 'junit:junit:4.12'
 }
 
 android {
@@ -54,6 +54,25 @@ android.libraryVariants.all { variant ->
           log.debug message.message, message.thrown
           break;
       }
+    }
+  }
+}
+
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      //本地的Maven地址设置为D:/repos
+     // repository(url: uri('D:/repos'))
+      //提交到远程服务器：
+     //release 可把密码，用户名设置为全局 变量
+      repository(url: "https://repo.rdc.aliyun.com/repository/42628-release-yCrBnr/") {
+        authentication(userName: "lB5b5y", password: "hNRih2GR5X")
+      }
+      //snapshot
+    /*  repository(url: "https://repo.rdc.aliyun.com/repository/42628-snapshot-rcBHY1") {
+        authentication(userName: "lB5b5y", password: "hNRih2GR5X")
+      }*/
     }
   }
 }

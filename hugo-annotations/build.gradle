@@ -1,34 +1,24 @@
 apply plugin: 'java'
-apply plugin: 'nexus'
 
 targetCompatibility = JavaVersion.VERSION_1_6
 sourceCompatibility = JavaVersion.VERSION_1_6
 
-modifyPom {
-  project {
-    name "Hugo Annotations"
-    description POM_DESCRIPTION
-    url POM_URL
 
-    scm {
-      url POM_SCM_URL
-      connection POM_SCM_CONNECTION
-      developerConnection POM_SCM_DEV_CONNECTION
-    }
 
-    licenses {
-      license {
-        name POM_LICENCE_NAME
-        url POM_LICENCE_URL
-        distribution POM_LICENCE_DIST
-      }
-    }
-
-    developers {
-      developer {
-        id POM_DEVELOPER_ID
-        name POM_DEVELOPER_NAME
-      }
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      //本地的Maven地址设置为D:/repos
+      // repository(url: uri('D:/repos'))
+      //提交到远程服务器：
+      //release 可把密码，用户名设置为全局 变量
+    /*  repository(url: "https://repo.rdc.aliyun.com/repository/42628-release-yCrBnr/") {
+        authentication(userName: "lB5b5y", password: "hNRih2GR5X")
+      }*/
+      //snapshot
+        repository(url: "https://repo.rdc.aliyun.com/repository/42628-snapshot-rcBHY1") {
+          authentication(userName: "lB5b5y", password: "hNRih2GR5X")
+        }
     }
   }
 }
